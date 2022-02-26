@@ -1,0 +1,273 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="trabajadores.trabajadores_list_view">
+      <field name="name">trabajadores.trabajadores.view.tree</field>
+      <field name="model">trabajadores.trabajadores</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="nombre"/>
+          <field name="apellido"/>
+          <field name="telefono"/>
+          <field name="puesto"/>
+          <field name="fecha_nacimiento"/>
+          <field name="edad"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- search -->
+
+    <record model="ir.ui.view" id="trabajadores.trabajadores_search_view">
+      <field name="name">trabajadores.trabajadores.view.search</field>
+      <field name="model">trabajadores.trabajadores</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="nombre"/>
+          <field name="apellido"/>
+          <field name="telefono"/>
+          <field name="puesto"/>
+          <field name="fecha_nacimiento"/>
+          <field name="edad"/>
+          <group>
+            <filter name="group_by_name" string="name" context="{'gropup_by':'name'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+        <!-- form -->
+
+    <record model="ir.ui.view" id="trabajadores.trabajadores_form_view">
+      <field name="name">trabajadores.trabajadores.view.form</field>
+      <field name="model">trabajadores.trabajadores</field>
+      <field name="arch" type="xml">
+        <form string="Información de los trabajadores">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                dni <field name="name" placeholder="DNI"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="nombre" placeholder="nombre"/>
+                <field name="apellido" placeholder="apellido"/>
+                <field name="telefono" placeholder="telefono"/>
+                <field name="puesto" placeholder="puesto"/>
+                <field name="fecha_nacimiento"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+        <!-- calendar -->
+
+    <record model="ir.ui.view" id="trabajadores.trabajadores_calendar_view">
+      <field name="name">trabajadores.trabajadores.view.calendar</field>
+      <field name="model">trabajadores.trabajadores</field>
+      <field name="arch" type="xml">
+        <calendar string="fecha_nacimento" date_start="fecha_nacimiento" mode="month">
+          <field name="name"/>
+          <field name="nombre"/>
+          <field name="apellido"/>
+          <field name="telefono"/>
+          <field name="puesto"/>
+          <field name="edad"/>
+        </calendar>
+      </field>
+    </record>
+
+        <!-- Definición de menús-->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="trabajadores.trabajadores_action_window">
+      <field name="name">trabajadores</field>
+      <field name="res_model">trabajadores.trabajadores</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="trabajadores" id="trabajadores.menu_root" web_icon="trabajadores,static/description/icon.png"/>
+    <menuitem name="trabajadores" id="trabajadores.menu_trabajadores" parent="trabajadores.menu_root"/>
+    <menuitem name="List" id="trabajadores.menu_trabajadores_list" parent="trabajadores.menu_trabajadores"
+              action="trabajadores.trabajadores_action_window"/>
+
+
+    <!--vista para el sugundo modelo: puesto-->
+
+
+    <record model="ir.ui.view" id="trabajadores.puesto_list_view">
+      <field name="name">trabajadores.puesto.view.tree</field>
+      <field name="model">trabajadores.puesto</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="puesto"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- search -->
+
+    <record model="ir.ui.view" id="trabajadores.puesto_search_view">
+      <field name="name">trabajadores.puesto.view.search</field>
+      <field name="model">trabajadores.puesto</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="puesto"/>
+          <group>
+            <filter name="group_by_name" string="name" context="{'gropup_by':'name'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+        <!-- form -->
+
+    <record model="ir.ui.view" id="trabajadores.puesto_form_view">
+      <field name="name">trabajadores.puesto.view.form</field>
+      <field name="model">trabajadores.puesto</field>
+      <field name="arch" type="xml">
+        <form string="Información de los trabajadores">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                id <field name="name" placeholder="id"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="puesto" placeholder="puesto"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+
+    </record>
+
+        <!-- Definición de menús-->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="trabajadores.puesto_action_window">
+      <field name="name">Puestos</field>
+      <field name="res_model">trabajadores.puesto</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="trabajadores" id="trabajadores.menu_root" web_icon="trabajadores,static/description/icon.png"/>
+    <menuitem name="puesto" id="trabajadores.menu_puesto" parent="trabajadores.menu_root"/>
+    <menuitem name="List" id="trabajadores.menu_puesto_list" parent="trabajadores.menu_puesto"
+              action="trabajadores.puesto_action_window"/>
+
+
+
+    <!--vista para el tercer modelo horario-->
+
+
+    <record model="ir.ui.view" id="trabajadores.horario_list_view">
+      <field name="name">trabajadores.horario.view.tree</field>
+      <field name="model">trabajadores.horario</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="idTrabajador"/>
+          <field name="fecha"/>
+          <field name='hora_entrada' widget='Float_time' />
+          <field name='hora_salida' widget='Float_time' />
+          <field name="horas_trabajo"/>
+          <field name="total_pagar"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- search -->
+
+    <record model="ir.ui.view" id="trabajadores.horario_search_view">
+      <field name="name">trabajadores.horario.view.search</field>
+      <field name="model">trabajadores.horario</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="idTrabajador"/>
+          <field name="fecha"/>
+          <field name='hora_entrada' widget='Float_time' />
+          <field name='hora_salida' widget='Float_time' />
+          <field name="horas_trabajo"/>
+          <field name="total_pagar"/>
+          <group>
+            <filter name="group_by_name" string="name" context="{'gropup_by':'name'}" />
+          </group>
+        </search>
+      </field>
+    </record>
+
+        <!-- form -->
+
+    <record model="ir.ui.view" id="trabajadores.horario_form_view">
+      <field name="name">trabajadores.horario.view.form</field>
+      <field name="model">trabajadores.horario</field>
+      <field name="arch" type="xml">
+        <form string="Información de los horarios">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                id <field name="name" placeholder="id"/>
+              </h1>
+            </div>
+            <group>
+              <group>
+                <separator string="Datos"/>
+                <field name="idTrabajador"/>
+                <field name="fecha" placeholder="fecha"/>
+                <field name='hora_entrada' widget='Float_time' />
+                <field name='hora_salida' widget='Float_time' />
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- calendar -->
+
+    <record model="ir.ui.view" id="trabajadores.horario_calendar_view">
+      <field name="name">trabajadores.horario.view.calendar</field>
+      <field name="model">trabajadores.horario</field>
+      <field name="arch" type="xml">
+        <calendar string="fecha" date_start="fecha" mode="month">
+          <field name="name"/>
+          <field name="idTrabajador"/>
+          <field name='hora_entrada' widget='Float_time' />
+          <field name='hora_salida' widget='Float_time' />
+          <field name="horas_trabajo"/>
+          <field name="total_pagar"/>
+        </calendar>
+      </field>
+    </record>
+
+        <!-- Definición de menús-->
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="trabajadores.horario_action_window">
+      <field name="name">Horarios</field>
+      <field name="res_model">trabajadores.horario</field>
+      <field name="view_mode">tree,form,calendar</field>
+    </record>
+
+    <menuitem name="trabajadores" id="trabajadores.menu_root" web_icon="trabajadores,static/description/icon.png"/>
+    <menuitem name="horarios" id="trabajadores.menu_horario" parent="trabajadores.menu_root"/>
+    <menuitem name="List" id="trabajadores.menu_horario_list" parent="trabajadores.menu_horario"
+              action="trabajadores.horario_action_window"/>
+  </data>
+</odoo>

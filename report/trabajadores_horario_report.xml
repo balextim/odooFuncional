@@ -1,0 +1,33 @@
+<odoo>
+    <record id="trabajadores.horario_report" model="ir.actions.report">
+        <field name="name"> Informe de los horarios</field>
+        <field name="model">trabajadores.horario</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">trabajadores.horario_report_view</field>
+        <field name="report_file">trabajadores.horario_report</field>
+        <field name="binding_model_id" ref="model_trabajadores_horario"/>
+        <field name="binding_type">report</field>
+
+    </record>
+
+    <template id="horario_report_view">
+        <t t-call="web.html_container">
+            <!-- muestra datos de la empresa (salta página) -->
+            <t t-call="web.external_layout">
+                <h1>Horario </h1><br />
+                <t t-foreach="docs" t-as="horario">
+                    <ul>
+                        <li>    id: <span t-field="horario.name" /></li>
+                        <li>    idTrabajador: <span t-field="horario.idTrabajador" /></li>
+                        <li>    fecha: <span t-field="horario.fecha" /></li>
+                        <li>    hora_entrada: <span t-field="horario.hora_entrada" /></li>
+                        <li>    hora_salida: <span t-field="horario.hora_salida" /></li>
+                        <li>    horas_trabajo: <span t-field="horario.horas_trabajo" /></li>
+                        <li>    total_pagar: <span t-field="horario.total_pagar" /></li>
+                    </ul>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

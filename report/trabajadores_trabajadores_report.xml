@@ -1,0 +1,33 @@
+<odoo>
+    <record id="trabajadores.trabajadores_report" model="ir.actions.report">
+        <field name="name"> Informe de trabajadores</field>
+        <field name="model">trabajadores.trabajadores</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">trabajadores.trabajadores_report_view</field>
+        <field name="report_file">trabajadores.trabajadores_report</field>
+        <field name="binding_model_id" ref="model_trabajadores_trabajadores"/>
+        <field name="binding_type">report</field>
+
+    </record>
+
+    <template id="trabajadores_report_view">
+        <t t-call="web.html_container">
+            <!-- muestra datos de la empresa (salta página) -->
+            <t t-call="web.external_layout">
+                <h1>Trabajadores </h1><br />
+                <t t-foreach="docs" t-as="trabajadores">
+                    <ul>
+                        <li>    dni: <span t-field="trabajadores.name" /></li>
+                        <li>    nombre: <span t-field="trabajadores.nombre" /></li>
+                        <li>    apellido: <span t-field="trabajadores.apellido" /></li>
+                        <li>    fecha_nacimiento: <span t-field="trabajadores.fecha_nacimiento" /></li>
+                        <li>    edad: <span t-field="trabajadores.edad" /></li>
+                        <li>    telefono: <span t-field="trabajadores.telefono" /></li>
+                        <li>    puesto: <span t-field="trabajadores.puesto" /></li>
+                    </ul>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
